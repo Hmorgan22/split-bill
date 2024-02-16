@@ -44,7 +44,6 @@ export default function App() {
   }
 
   function handleSelection(friend) {
-    // setSelectedFriend(friend);
     setSelectedFriend((cur) => (cur?.id === friend.id ? null : friend));
     setShowAddFriend(false);
   }
@@ -70,7 +69,12 @@ export default function App() {
           onSelection={handleSelection}
         />
 
-        {showAddFriend && <FormAddFriend onAddFriend={handleAddFriend} />}
+        {showAddFriend && (
+          <FormAddFriend
+            onAddFriend={handleAddFriend}
+            key={selectedFriend.id}
+          />
+        )}
 
         <Button onClick={handleShowAddFriend}>
           {showAddFriend ? "Close" : "Add friend"}
@@ -81,7 +85,6 @@ export default function App() {
         <FormSplitBill
           selectedFriend={selectedFriend}
           onSplitBill={handleSplitBill}
-          key={selectedFriend.id}
         />
       )}
     </div>
